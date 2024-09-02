@@ -3,7 +3,6 @@
 \docType{package}
 \name{ipeaplot}
 \alias{ipeaplot}
-\alias{_PACKAGE}
 \alias{ipeaplot-package}
 \title{ipeaplot: ggplot Graphics in Ipea Standard}
 \description{
@@ -38,6 +37,7 @@ Authors:
 
 Other contributors:
 \itemize{
+  \item Fabio Vaz \email{fabio.vaz@ipea.gov.br} [contributor]
   \item Ipea - Institue for Applied Economic Research [copyright holder, funder]
 }
 

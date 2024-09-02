@@ -31,21 +31,19 @@ library(patchwork)
 # Load mtcars dataset
 data(mtcars)
 
-## ----eval=TRUE, message=FALSE, warning=FALSE, fig.align = "center"------------
-fig_raw <- ggplot() +
-              geom_point(data = mtcars, aes(x = hp , y = mpg, color = cyl)) +
-              labs(y='Consumo de Combustível (milhas por galão)',
-                   x ='Potência (Número de cavalos)',
-                   color='Cilindradas')
-
-fig_base <- fig_raw +
-              scale_color_ipea() +
-              theme_ipea()
-
-
-
-## ---- echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
-#  knitr::include_graphics(paste0(getwd(),"/prints_intro_ipeaplot/grafico1.png"))
+## ---- message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
+#  fig_raw <- ggplot() +
+#                geom_point(data = mtcars, aes(x = hp , y = mpg, color = cyl)) +
+#                labs(y='Consumo de Combustível (milhas por galão)',
+#                     x ='Potência (Número de cavalos)',
+#                     color='Cilindradas')
+#  
+#  fig_base <- fig_raw +
+#                scale_color_ipea() +
+#                theme_ipea()
+#  
+#  fig_base
+#  
 
 ## ----eval=TRUE, echo=FALSE, fig.dim = c(5, 4),fig.align = "center", out.width = "50%"----
 # Salvar as configurações originais
@@ -74,40 +72,18 @@ pal(ipea_pal(palette = "Green-Blue")(9)); mtext("Green-Blue")
 # Restaurar as configurações originais
 par(old.par)
 
-## ----eval=FALSE, message=FALSE, warning=FALSE---------------------------------
+## ---- message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
 #  # paleta sequencial verde
 #  fig_base + scale_color_ipea(palette = "Green")
-#  
 
-## ---- echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
-#  knitr::include_graphics(paste0(getwd(),"/prints_intro_ipeaplot/grafico2.png"))
-
-## ----eval=FALSE, message=FALSE, warning=FALSE,fig.align = "center"------------
+## ---- message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
 #  # paleta divergente de laranja a azul
 #  fig_base + scale_color_ipea(palette = "Orange-Blue")
-#  
 
-## ---- echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
-#  knitr::include_graphics(paste0(getwd(),"/prints_intro_ipeaplot/grafico3.png"))
+## ----eval=TRUE----------------------------------------------------------------
+df <- abjData::pnud_muni
 
-## ----eval=FALSE, message=FALSE, warning=FALSE---------------------------------
-#  graph <- ggplot() +
-#    geom_point(data = mtcars, aes(x = hp , y = mpg, color = factor(cyl))) +
-#    labs(y='Consumo de Combustível\n(milhas por galão)',
-#         x ='Potência (Número de cavalos)',
-#         color='Cilindradas') +
-#    scale_color_ipea(palette = "Orange", RUE ) +
-#    theme_ipea()
-
-## ---- echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
-#  knitr::include_graphics(paste0(getwd(),"/prints_intro_ipeaplot/grafico4.png"))
-#  
-
-## ----eval=FALSE---------------------------------------------------------------
-#  df <- abjData::pnud_muni
-#  head(df)
-
-## ----eval=FALSE, message=FALSE, warning=FALSE---------------------------------
+## ---- message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
 #  # cria variavel identificando a regiao de cada municipio
 #  df <- df |>
 #        mutate(regiao = substring(uf, 1, 1),
@@ -132,14 +108,10 @@ par(old.par)
 #    ylab('Proporção em %') +
 #    xlab('Ano') +
 #    theme_ipea()
-
-## ---- echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
-#  
-#  knitr::include_graphics(paste0(getwd(),"/prints_intro_ipeaplot/grafico5.png"))
 #  
 
-## ----eval=FALSE, message=FALSE, warning=FALSE---------------------------------
-#  graph <- ggplot() +
+## ---- message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
+#  ggplot() +
 #    geom_col(data = df_fig1, aes(x=ano, y=t_lixo, fill= factor(ano))) +
 #    scale_fill_ipea(palette = 'Green') +
 #    labs(title = 'Proporção da população com coleta de lixo', fill='Ano') +
@@ -149,44 +121,38 @@ par(old.par)
 #    theme_ipea(x_breaks = 3)
 #  
 
-## ---- echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
-#  
-#  knitr::include_graphics(paste0(getwd(),"/prints_intro_ipeaplot/grafico6.png"))
-#  
+## ----eval=TRUE, message=FALSE, warning=FALSE, results='hide'------------------
+# Load municipality and state spatial data
+mun <- geobr::read_municipality(year = 2010)
+uf  <- geobr::read_state(year = 2010)
 
-## ----eval=FALSE, message=FALSE, warning=FALSE, results='hide'-----------------
-#  # Load municipality and state spatial data
-#  mun <- geobr::read_municipality(year = 2010)
-#  uf  <- geobr::read_state(year = 2010)
+## ----eval=TRUE, message=FALSE, warning=FALSE, results='hide'------------------
+# Load municipality and state spatial data
+mun = read_municipality()
+uf  = read_state()
 
-## ----eval=FALSE, message=FALSE, warning=FALSE, results='hide'-----------------
-#  # Load municipality and state spatial data
-#  mun = read_municipality()
-#  uf  = read_state()
-#  
-#  # Subset and select specific columns from the 'pnud_muni' dataset
-#  df_escola <- df |>
-#               subset(ano == 2010) %>%
-#               select(ano, code_muni = codmun7, e_anosestudo)
-#  
-#  # Perform a left join between the 'mun' and 'pnud' data frames
-#  df3 <- dplyr::left_join(mun, df_escola, by = 'code_muni')
-#  
+# Subset and select specific columns from the 'pnud_muni' dataset
+df_escola <- df |>
+             subset(ano == 2010) %>%
+             select(ano, code_muni = codmun7, e_anosestudo)
 
-## ----eval=FALSE, message=FALSE, warning=FALSE---------------------------------
-#  fig_map <- ggplot() +
-#               geom_sf(data = df3, aes(fill = e_anosestudo), color = NA) +
-#               geom_sf(data = uf, color = "black", fill = NA) +
-#               ggtitle("Média de anos de estudo") +
-#               scale_fill_ipea(palette = 'Orange-Blue',
-#                               name='Anos de\nestudo') +
-#               theme_ipea(axis_lines = 'none', include_ticks = F, axis_values = F)
+# Perform a left join between the 'mun' and 'pnud' data frames
+df3 <- dplyr::left_join(mun, df_escola, by = 'code_muni')
 
-## ---- echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
-#   knitr::include_graphics(paste0(getwd(),"/prints_intro_ipeaplot/grafico7.png"))
 
-## ----eval=FALSE---------------------------------------------------------------
+## ---- message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
+#  ggplot() +
+#    geom_sf(data = df3, aes(fill = e_anosestudo), color = NA) +
+#    geom_sf(data = uf, color = "black", fill = NA) +
+#    ggtitle("Média de anos de estudo") +
+#    scale_fill_ipea(palette = 'Orange-Blue',
+#                    name='Anos de\nestudo') +
+#    theme_ipea(axis_lines = 'none', include_ticks = F, axis_values = F)
+
+## ---- eval=FALSE, echo=TRUE---------------------------------------------------
 #  save_eps(fig2,
 #           file.name = "figura_2.eps")
+#  save_pdf(fig2,
+#           file.name = "figura_2.pdf")
 #  
 

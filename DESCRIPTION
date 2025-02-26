@@ -1,7 +1,7 @@
 Type: Package
 Package: ipeaplot
 Title: Add Ipea Editorial Standards to 'ggplot2' Graphics
-Version: 0.4.0
+Version: 0.4.1
 Authors@R: c(
     person("Pedro", "Ferreira", role=c("aut","cre"), email="pedro.ferreira2@ipea.gov.br"),
     person("Pedro","Jorge", role=c("aut"), email="pedro.alves@ipea.gov.br"),
@@ -27,7 +27,7 @@ VignetteBuilder: knitr
 Encoding: UTF-8
 RoxygenNote: 7.3.2
 NeedsCompilation: no
-Packaged: 2024-09-02 12:08:38 UTC; caval
+Packaged: 2025-02-26 14:58:30 UTC; caval
 Author: Pedro Ferreira [aut, cre],
   Pedro Jorge [aut],
   Daniel Lima [aut],
@@ -37,4 +37,4 @@ Author: Pedro Ferreira [aut, cre],
   Fabio Vaz [ctb],
   Ipea - Institue for Applied Economic Research [cph, fnd]
 Repository: CRAN
-Date/Publication: 2024-09-02 12:40:02 UTC
+Date/Publication: 2025-02-26 15:10:02 UTC

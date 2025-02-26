@@ -1,6 +1,11 @@
+# ipeaplot 0.4.1
+  * Palette 'Pink'.
+  * Fixed: Adjust breaks logic to address issue #60
+  * Fixed: Issue with categorical data on the Y-axis, addressed in issue #61.
+    
 # ipeaplot 0.4.0
   * The Frutiger family has been replaced by the default sans-serif font in titles and labels.
-  * New function `save_eps()`
+  * New function `save_pdf()`
 
 # ipeaplot 0.3.1
 

@@ -58,13 +58,12 @@ pal(ipea_pal(palette = "Orange")(9)); mtext("Orange")
 # Restaurar as configurações originais
 par(old.par)
 
-
 ## ----eval=TRUE, echo=FALSE, fig.dim = c(5, 4),fig.align = "center", out.width = "50%"----
 # Salvar as configurações originais
 old.par <- par(no.readonly = TRUE)
 
 # Modificar as configurações conforme necessário
-par(mfrow = c(3, 1), mar = c(1, 0, 2, 0))
+par(mfrow = c(4, 1), mar = c(1, 0, 2, 0))
 pal(ipea_pal(palette = "Red-Blue")(9)); mtext("Red-Blue")
 pal(ipea_pal(palette = "Orange-Blue")(9)); mtext("Orange-Blue")
 pal(ipea_pal(palette = "Green-Blue")(9)); mtext("Green-Blue")

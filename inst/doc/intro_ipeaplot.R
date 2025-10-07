@@ -1,4 +1,4 @@
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -15,9 +15,9 @@ pal <- function(col, border = "light gray") {
 }
 
 ## ----eval=FALSE, message=FALSE, warning=FALSE---------------------------------
-#  # Development version
-#  utils::remove.packages('ipeaplot')
-#  remotes::install_github("ipeadata-lab/ipeaplot")
+# # Development version
+# utils::remove.packages('ipeaplot')
+# remotes::install_github("ipeadata-lab/ipeaplot")
 
 ## ----eval=TRUE, message=FALSE, warning=FALSE, results='hide'------------------
 # Load packages
@@ -31,19 +31,19 @@ library(patchwork)
 # Load mtcars dataset
 data(mtcars)
 
-## ---- message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
-#  fig_raw <- ggplot() +
-#                geom_point(data = mtcars, aes(x = hp , y = mpg, color = cyl)) +
-#                labs(y='Consumo de Combustível (milhas por galão)',
-#                     x ='Potência (Número de cavalos)',
-#                     color='Cilindradas')
-#  
-#  fig_base <- fig_raw +
-#                scale_color_ipea() +
-#                theme_ipea()
-#  
-#  fig_base
-#  
+## ----message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"-----
+# fig_raw <- ggplot() +
+#               geom_point(data = mtcars, aes(x = hp , y = mpg, color = cyl)) +
+#               labs(y='Consumo de Combustível (milhas por galão)',
+#                    x ='Potência (Número de cavalos)',
+#                    color='Cilindradas')
+# 
+# fig_base <- fig_raw +
+#               scale_color_ipea() +
+#               theme_ipea()
+# 
+# fig_base
+# 
 
 ## ----eval=TRUE, echo=FALSE, fig.dim = c(5, 4),fig.align = "center", out.width = "50%"----
 # Salvar as configurações originais
@@ -71,54 +71,54 @@ pal(ipea_pal(palette = "Green-Blue")(9)); mtext("Green-Blue")
 # Restaurar as configurações originais
 par(old.par)
 
-## ---- message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
-#  # paleta sequencial verde
-#  fig_base + scale_color_ipea(palette = "Green")
+## ----message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"-----
+# # paleta sequencial verde
+# fig_base + scale_color_ipea(palette = "Green")
 
-## ---- message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
-#  # paleta divergente de laranja a azul
-#  fig_base + scale_color_ipea(palette = "Orange-Blue")
+## ----message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"-----
+# # paleta divergente de laranja a azul
+# fig_base + scale_color_ipea(palette = "Orange-Blue")
 
 ## ----eval=TRUE----------------------------------------------------------------
 df <- abjData::pnud_muni
 
-## ---- message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
-#  # cria variavel identificando a regiao de cada municipio
-#  df <- df |>
-#        mutate(regiao = substring(uf, 1, 1),
-#               regiao = case_when(regiao == 1 ~ 'Norte',
-#                                  regiao == 2 ~ 'Nordeste',
-#                                  regiao == 3 ~ 'Sudeste',
-#                                  regiao == 4 ~ 'Sul',
-#                                  regiao == 5 ~ 'Centro Oeste'))
-#  
-#  # calcula media de colega de esgoto por ano e regiao
-#  df_fig1 <- df |>
-#             mutate(regiao = substring(uf, 1, 1)) |>
-#             group_by(ano, regiao) |>
-#             summarise( t_lixo = weighted.mean(x=t_lixo, w = pop)) |>
-#             collect()
-#  
-#  # plot
-#  ggplot() +
-#    geom_line(data = df_fig1, aes(x=ano, y=t_lixo, color= regiao)) +
-#    scale_color_ipea(palette = 'Orange') +
-#    labs(title = 'Proporção da população com coleta de lixo', color='Região') +
-#    ylab('Proporção em %') +
-#    xlab('Ano') +
-#    theme_ipea()
-#  
+## ----message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"-----
+# # cria variavel identificando a regiao de cada municipio
+# df <- df |>
+#       mutate(regiao = substring(uf, 1, 1),
+#              regiao = case_when(regiao == 1 ~ 'Norte',
+#                                 regiao == 2 ~ 'Nordeste',
+#                                 regiao == 3 ~ 'Sudeste',
+#                                 regiao == 4 ~ 'Sul',
+#                                 regiao == 5 ~ 'Centro Oeste'))
+# 
+# # calcula media de colega de esgoto por ano e regiao
+# df_fig1 <- df |>
+#            mutate(regiao = substring(uf, 1, 1)) |>
+#            group_by(ano, regiao) |>
+#            summarise( t_lixo = weighted.mean(x=t_lixo, w = pop)) |>
+#            collect()
+# 
+# # plot
+# ggplot() +
+#   geom_line(data = df_fig1, aes(x=ano, y=t_lixo, color= regiao)) +
+#   scale_color_ipea(palette = 'Orange') +
+#   labs(title = 'Proporção da população com coleta de lixo', color='Região') +
+#   ylab('Proporção em %') +
+#   xlab('Ano') +
+#   theme_ipea()
+# 
 
-## ---- message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
-#  ggplot() +
-#    geom_col(data = df_fig1, aes(x=ano, y=t_lixo, fill= factor(ano))) +
-#    scale_fill_ipea(palette = 'Green') +
-#    labs(title = 'Proporção da população com coleta de lixo', fill='Ano') +
-#    ylab('Proporção em %') +
-#    xlab('Ano') +
-#    facet_wrap(. ~ regiao) +
-#    theme_ipea(x_breaks = 3)
-#  
+## ----message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"-----
+# ggplot() +
+#   geom_col(data = df_fig1, aes(x=ano, y=t_lixo, fill= factor(ano))) +
+#   scale_fill_ipea(palette = 'Green') +
+#   labs(title = 'Proporção da população com coleta de lixo', fill='Ano') +
+#   ylab('Proporção em %') +
+#   xlab('Ano') +
+#   facet_wrap(. ~ regiao) +
+#   theme_ipea(x_breaks = 3)
+# 
 
 ## ----eval=TRUE, message=FALSE, warning=FALSE, results='hide'------------------
 # Load municipality and state spatial data
@@ -139,19 +139,44 @@ df_escola <- df |>
 df3 <- dplyr::left_join(mun, df_escola, by = 'code_muni')
 
 
-## ---- message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"----
-#  ggplot() +
-#    geom_sf(data = df3, aes(fill = e_anosestudo), color = NA) +
-#    geom_sf(data = uf, color = "black", fill = NA) +
-#    ggtitle("Média de anos de estudo") +
-#    scale_fill_ipea(palette = 'Orange-Blue',
-#                    name='Anos de\nestudo') +
-#    theme_ipea(axis_lines = 'none', include_ticks = F, axis_values = F)
+## ----message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"-----
+# ggplot() +
+#   geom_sf(data = df3, aes(fill = e_anosestudo), color = NA) +
+#   geom_sf(data = uf, color = "black", fill = NA) +
+#   ggtitle("Média de anos de estudo") +
+#   scale_fill_ipea(palette = 'Orange-Blue',
+#                   name='Anos de\nestudo') +
+#   theme_ipea(axis_lines = 'none', include_ticks = F, axis_values = F)
 
-## ---- eval=FALSE, echo=TRUE---------------------------------------------------
-#  save_eps(fig2,
-#           file.name = "figura_2.eps")
-#  save_pdf(fig2,
-#           file.name = "figura_2.pdf")
-#  
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
+# # Salvar apenas em EPS (formato padrão)
+# save_ipeaplot(fig_base, file.name = "figura_exemplo")
+# 
+# # Salvar em múltiplos formatos
+# save_ipeaplot(fig_base,
+#               file.name = "figura_exemplo",
+#               format = c("eps", "pdf", "png"))
+
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
+# # Exemplo com configurações personalizadas
+# save_ipeaplot(fig_base,
+#               file.name = "figura_personalizada",
+#               format = c("eps", "png"),
+#               width = 8, height = 5,
+#               units = "in",
+#               dpi = 600,
+#               background = "white",
+#               path = "figuras/")
+# 
+# # Salvar com data no nome do arquivo
+# save_ipeaplot(fig_base,
+#               file.name = "figura_com_data",
+#               format = "pdf",
+#               include_date = TRUE)
+# 
+# # Evitar sobrescrever arquivos existentes
+# save_ipeaplot(fig_base,
+#               file.name = "figura_segura",
+#               format = "png",
+#               overwrite = FALSE)
 

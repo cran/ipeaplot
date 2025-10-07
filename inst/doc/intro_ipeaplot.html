@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2025-02-26" />
+<meta name="date" content="2025-10-07" />
 
 <title>Introdução ao ipeaplot</title>
 
@@ -350,7 +350,7 @@ display: none;
 
 
 <h1 class="title toc-ignore">Introdução ao ipeaplot</h1>
-<h4 class="date">2025-02-26</h4>
+<h4 class="date">2025-10-07</h4>
 
 </div>
 
@@ -383,12 +383,10 @@ figura (eixos, fontes, linhas, grid, etc.);</li>
 <li><code>scale_color_ipea()</code> e <code>scale_fill_ipea()</code>-
 selecionam paleta de cores dentro de um conjunto de opções utilizadas
 pelo Ipea;</li>
-<li><code>save_eps()</code> - salva a figura em formato
-<code>.eps</code>, um formato vetorial de alta resolução utilizado pela
-equipe do Editorial do Ipea.</li>
-<li><code>save_pdf()</code> - salva a figura em formato
-<code>.pdf</code>, um formato vetorial de alta resolução utilizado pela
-equipe do Editorial do Ipea.</li>
+<li><code>save_ipeaplot()</code> - função unificada para salvar objetos
+ggplot em múltiplos formatos (<code>.eps</code>, <code>.pdf</code>,
+<code>.png</code>, <code>.jpg</code>), oferecendo flexibilidade e
+controle avançado sobre a exportação de figuras.</li>
 </ol>
 </div>
 <div id="fontes" class="section level1">
@@ -397,9 +395,9 @@ equipe do Editorial do Ipea.</li>
 em títulos e rótulos das figuras, a fonte sem serifa padrão do sistema
 operacional do usuário e não a tipografia recomendada pelo Editorial do
 Ipea (<em>Frutiger</em>). Se as figuras forem salvas em formatos
-“editáveis” (pdf ou eps, usando as funções <code>save_pdf()</code> ou
-<code>save_eps()</code>), a equipe editorial poderá alterar a fonte no
-momento da edição de uma publicação.</p>
+“editáveis” (pdf ou eps, usando a função <code>save_ipeaplot()</code>),
+a equipe editorial poderá alterar a fonte no momento da edição de uma
+publicação.</p>
 </div>
 <div id="demonstração-do-pacote" class="section level1">
 <h1>Demonstração do pacote</h1>
@@ -541,7 +539,8 @@ df_escola &lt;- df |&gt;
              select(ano, code_muni = codmun7, e_anosestudo)
 
 # Perform a left join between the &#39;mun&#39; and &#39;pnud&#39; data frames
-df3 &lt;- dplyr::left_join(mun, df_escola, by = &#39;code_muni&#39;)</code></pre>
+df3 &lt;- dplyr::left_join(mun, df_escola, by = &#39;code_muni&#39;)
+</code></pre>
 <p>Agora basta criar o mapa:</p>
 <pre class="r"><code>ggplot() +
   geom_sf(data = df3, aes(fill = e_anosestudo), color = NA) +
@@ -554,18 +553,79 @@ df3 &lt;- dplyr::left_join(mun, df_escola, by = &#39;code_muni&#39;)</code></pre
 </div>
 <div id="salvando-figura" class="section level2">
 <h2>Salvando figura</h2>
-<p>Finalmente, o pacote <strong>ipeaplot</strong> traz as funções
-<code>save_eps()</code> e <code>save_pdf()</code> para facilitar a
-exportação da figura para um arquivo em formato <code>.eps</code>, um
-formato de imagem vetorial de alta resolução.</p>
-<p>Basta passar o objeto ggplot da figura que deseja salvar, o nome do
-arquivo <code>file.name</code> e as dimensões da figura
-<code>width</code> e <code>height</code> em centímetros:</p>
-<pre class="r"><code>save_eps(fig2,
-         file.name = &quot;figura_2.eps&quot;)
-save_pdf(fig2,
-         file.name = &quot;figura_2.pdf&quot;)
-</code></pre>
+<p>Finalmente, o pacote <strong>ipeaplot</strong> traz a função
+<code>save_ipeaplot()</code> para facilitar a exportação da figura para
+múltiplos formatos de arquivo, incluindo formatos vetoriais de alta
+resolução como <code>.eps</code> e <code>.pdf</code>, além de formatos
+raster como <code>.png</code> e <code>.jpg</code>.</p>
+<p>A função <code>save_ipeaplot()</code> oferece uma interface unificada
+e flexível para salvar gráficos, permitindo especificar múltiplos
+formatos simultaneamente, controlar dimensões, qualidade, e diversas
+outras opções avançadas.</p>
+<div id="uso-básico" class="section level3">
+<h3>Uso básico</h3>
+<p>Para usar a função, basta passar o objeto ggplot da figura que deseja
+salvar, o nome base do arquivo <code>file.name</code> (sem extensão) e
+opcionalmente especificar os formatos desejados:</p>
+<pre class="r"><code># Salvar apenas em EPS (formato padrão)
+save_ipeaplot(fig_base, file.name = &quot;figura_exemplo&quot;)
+
+# Salvar em múltiplos formatos
+save_ipeaplot(fig_base, 
+              file.name = &quot;figura_exemplo&quot;,
+              format = c(&quot;eps&quot;, &quot;pdf&quot;, &quot;png&quot;))</code></pre>
+</div>
+<div id="parâmetros-principais" class="section level3">
+<h3>Parâmetros principais</h3>
+<p>A função <code>save_ipeaplot()</code> oferece diversos parâmetros
+para controle fino da exportação:</p>
+<ul>
+<li><strong><code>format</code></strong>: Vetor com formatos desejados
+(<code>&quot;eps&quot;</code>, <code>&quot;pdf&quot;</code>, <code>&quot;png&quot;</code>,
+<code>&quot;jpg&quot;</code>)</li>
+<li><strong><code>width</code></strong> e
+<strong><code>height</code></strong>: Dimensões da figura (padrão: 6.30
+× 3.94 polegadas)</li>
+<li><strong><code>units</code></strong>: Unidades das dimensões
+(<code>&quot;in&quot;</code>, <code>&quot;mm&quot;</code>, <code>&quot;cm&quot;</code>,
+<code>&quot;px&quot;</code>)</li>
+<li><strong><code>dpi</code></strong>: Resolução para formatos raster
+(padrão: 300)</li>
+<li><strong><code>background</code></strong>: Cor de fundo (use
+<code>NA</code> para PNG transparente)</li>
+<li><strong><code>quality</code></strong>: Qualidade para JPEG (0-100,
+padrão: 95)</li>
+<li><strong><code>path</code></strong>: Diretório de saída (padrão:
+diretório atual)</li>
+</ul>
+</div>
+<div id="exemplos-avançados" class="section level3">
+<h3>Exemplos avançados</h3>
+<pre class="r"><code># Exemplo com configurações personalizadas
+save_ipeaplot(fig_base,
+              file.name = &quot;figura_personalizada&quot;,
+              format = c(&quot;eps&quot;, &quot;png&quot;),
+              width = 8, height = 5,
+              units = &quot;in&quot;,
+              dpi = 600,
+              background = &quot;white&quot;,
+              path = &quot;figuras/&quot;)
+
+# Salvar com data no nome do arquivo
+save_ipeaplot(fig_base,
+              file.name = &quot;figura_com_data&quot;,
+              format = &quot;pdf&quot;,
+              include_date = TRUE)
+
+# Evitar sobrescrever arquivos existentes
+save_ipeaplot(fig_base,
+              file.name = &quot;figura_segura&quot;,
+              format = &quot;png&quot;,
+              overwrite = FALSE)</code></pre>
+<p>A função automaticamente cria o diretório de saída se necessário e
+oferece opções avançadas como uso de Cairo para melhor qualidade
+vetorial e ragg para renderização raster otimizada.</p>
+</div>
 </div>
 </div>
 

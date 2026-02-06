@@ -125,7 +125,7 @@ df <- abjData::pnud_muni
 mun <- geobr::read_municipality(year = 2010)
 uf  <- geobr::read_state(year = 2010)
 
-## ----eval=TRUE, message=FALSE, warning=FALSE, results='hide'------------------
+## ----eval=TRUE, message=FALSE, warning=FALSE, results='hide', eval = all(!is.null(mun), !is.null(uf))----
 # Load municipality and state spatial data
 mun = read_municipality()
 uf  = read_state()
@@ -139,14 +139,14 @@ df_escola <- df |>
 df3 <- dplyr::left_join(mun, df_escola, by = 'code_muni')
 
 
-## ----message=FALSE, warning=FALSE, fig.align="center", out.width = "100%"-----
-# ggplot() +
-#   geom_sf(data = df3, aes(fill = e_anosestudo), color = NA) +
-#   geom_sf(data = uf, color = "black", fill = NA) +
-#   ggtitle("Média de anos de estudo") +
-#   scale_fill_ipea(palette = 'Orange-Blue',
-#                   name='Anos de\nestudo') +
-#   theme_ipea(axis_lines = 'none', include_ticks = F, axis_values = F)
+## ----message=FALSE, warning=FALSE, fig.align="center", out.width = "100%", eval = all(!is.null(mun), !is.null(uf))----
+ggplot() +
+  geom_sf(data = df3, aes(fill = e_anosestudo), color = NA) +
+  geom_sf(data = uf, color = "black", fill = NA) +
+  ggtitle("Média de anos de estudo") +
+  scale_fill_ipea(palette = 'Orange-Blue',
+                  name='Anos de\nestudo') +
+  theme_ipea(axis_lines = 'none', include_ticks = F, axis_values = F)
 
 ## ----eval=FALSE, echo=TRUE----------------------------------------------------
 # # Salvar apenas em EPS (formato padrão)

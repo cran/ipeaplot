@@ -13,7 +13,6 @@ knitr::opts_chunk$set(
 # library(dplyr)
 # library(data.table)
 # library(abjData)
-# library(geobr)
 # library(reshape)
 # library(knitr)
 # 

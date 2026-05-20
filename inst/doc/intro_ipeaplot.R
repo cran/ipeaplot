@@ -126,10 +126,6 @@ mun <- geobr::read_municipality(year = 2010)
 uf  <- geobr::read_state(year = 2010)
 
 ## ----eval=TRUE, message=FALSE, warning=FALSE, results='hide', eval = all(!is.null(mun), !is.null(uf))----
-# Load municipality and state spatial data
-mun = read_municipality()
-uf  = read_state()
-
 # Subset and select specific columns from the 'pnud_muni' dataset
 df_escola <- df |>
              subset(ano == 2010) %>%

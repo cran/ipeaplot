@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2026-02-06" />
+<meta name="date" content="2026-05-20" />
 
 <title>Introdução ao ipeaplot</title>
 
@@ -350,7 +350,7 @@ display: none;
 
 
 <h1 class="title toc-ignore">Introdução ao ipeaplot</h1>
-<h4 class="date">2026-02-06</h4>
+<h4 class="date">2026-05-20</h4>
 
 </div>
 
@@ -529,11 +529,7 @@ uf  &lt;- geobr::read_state(year = 2010)</code></pre>
 <p>Agora nós precisamos fazer um <em>merge</em> dos dados espaciais e
 dos dados com as estimativas de anos de estudo. A variável com os
 códigos do municípios é a nossa chave para unir as duas bases.</p>
-<pre class="r"><code># Load municipality and state spatial data
-mun = read_municipality()
-uf  = read_state()
-
-# Subset and select specific columns from the &#39;pnud_muni&#39; dataset
+<pre class="r"><code># Subset and select specific columns from the &#39;pnud_muni&#39; dataset
 df_escola &lt;- df |&gt;
              subset(ano == 2010) %&gt;%
              select(ano, code_muni = codmun7, e_anosestudo)

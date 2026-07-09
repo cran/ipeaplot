@@ -1,7 +1,7 @@
-65e5ef54c0178cb04cb1906de80ea870 *DESCRIPTION
+6d9ae575ae575886668975185dee2440 *DESCRIPTION
 35703bf1accab7dffdfa57fbd22cdeb8 *LICENSE
 5d04a39a4447e548f80a1d69c4bfbe68 *NAMESPACE
-64993856face3aa51a273ff26f0e81df *NEWS.md
+9c903dbdf55e7dd5376a85746e803659 *NEWS.md
 b5323ed9fd05d357b85449aa15e44680 *R/ipea_palette.R
 3fd82aea1c803a0739c0c6dfcca1c1c7 *R/ipeaplot.R
 24c4b34c518798ea06ac03da4f0efb6d *R/save_ipeaplot.R
@@ -11,10 +11,10 @@ b5323ed9fd05d357b85449aa15e44680 *R/ipea_palette.R
 8889a02ac612988c1dd4fa8e0773d850 *build/vignette.rds
 20df7242119b6d8123a08ea1e0ac3ca9 *inst/doc/cookbook.R
 17579b04dc11f3eed2eef05de02d6ac4 *inst/doc/cookbook.Rmd
-b19c4608f6211815d6612d6adb15dc9c *inst/doc/cookbook.html
-91b5550cd4956d5ec44fbb0f6d1b0348 *inst/doc/intro_ipeaplot.R
-ebfd7973fbce9c7337590cc6373122bb *inst/doc/intro_ipeaplot.Rmd
-87c6ebbef7a9500be80012950dc1212d *inst/doc/intro_ipeaplot.html
+bb80a75156888ac0ec994c845f95130b *inst/doc/cookbook.html
+17158aa0d96c01a0603c65c91e9a6454 *inst/doc/intro_ipeaplot.R
+3991ce82fd6f906e88fb5b6a732a5bed *inst/doc/intro_ipeaplot.Rmd
+49c5fabf2544d0112818cec673cf19d1 *inst/doc/intro_ipeaplot.html
 4836427b8bc8ae6b7ca35969df39ab77 *man/ipea_pal.Rd
 eea33b50426faf16455649926aed4170 *man/ipea_palette.Rd
 2cab9998b68c367f72b801ff460441e3 *man/ipeaplot.Rd
@@ -27,7 +27,7 @@ a420d4ff497160b7674f44f7e2da2b4d *man/theme_ipea.Rd
 0445b2f12d59cad270ac8245b55cfcef *tests/tests_pedro_alves/test.R
 df51cded8b130c22a0480be6d1113e12 *tests/tests_rafa/test_rafa.R
 17579b04dc11f3eed2eef05de02d6ac4 *vignettes/cookbook.Rmd
-ebfd7973fbce9c7337590cc6373122bb *vignettes/intro_ipeaplot.Rmd
+3991ce82fd6f906e88fb5b6a732a5bed *vignettes/intro_ipeaplot.Rmd
 1ba2aee1be65e9e5d4d95818820ab373 *vignettes/prints_ipeaplot/grafico1.png
 6bc9b2a2d94bbdafa36f4e6511583a6c *vignettes/prints_ipeaplot/grafico2.png
 eb2c21b592eabbe37fa10527e1a36c1f *vignettes/prints_ipeaplot/grafico3.png

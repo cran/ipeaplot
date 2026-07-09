@@ -1,3 +1,6 @@
+# ipeaplot 0.5.4
+  * Fixed the vignette to address issues with geobr.
+
 # ipeaplot 0.5.3
   * Minor fix for ipeaplot vignette build error
 
